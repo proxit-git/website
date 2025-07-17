@@ -13,7 +13,7 @@ import {
 import { GlassCard } from './GlassCard';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import logoImage from '@/assets/logo.png';
+import teamLogo from '@/assets/team-logo.png';
 
 export const Footer = () => {
   const quickLinks = [
@@ -44,7 +44,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative mt-20">
+    <footer id="contact" className="relative mt-20 section-background">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none opacity-50">
         <motion.div
@@ -104,12 +104,12 @@ export const Footer = () => {
               <GlassCard className="p-6 h-full">
                 <div className="flex items-center gap-3 mb-6">
                   <img 
-                    src={logoImage} 
+                    src={teamLogo} 
                     alt="لوگو" 
-                    className="w-10 h-10 rounded-xl"
+                    className="w-12 h-8 object-contain rounded-xl"
                   />
                   <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                    آینده‌نگر
+                    قهرمانان زندگی
                   </h3>
                 </div>
                 <p className="text-foreground/70 leading-relaxed mb-6">
@@ -238,7 +238,7 @@ export const Footer = () => {
             <GlassCard variant="strong" className="p-6">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p className="text-foreground/60 text-sm text-center md:text-right">
-                  © ۱۴۰۴ تیم آینده‌نگر. تمامی حقوق محفوظ است.
+                  © ۱۴۰۴ قهرمانان زندگی. تمامی حقوق محفوظ است.
                 </p>
                 
                 <div className="flex items-center gap-4">

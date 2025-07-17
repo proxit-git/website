@@ -8,91 +8,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light theme */
+    /* White theme with red accents */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 0 100% 60%;
+    --primary: 0 84% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 220 13% 18%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 0 85% 55%;
+    --accent: 0 72% 51%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 0 100% 60%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 84% 60%;
 
     --radius: 1rem;
 
-    /* Glass morphism effects - Light */
-    --glass-bg: 255 255 255 / 0.1;
-    --glass-border: 0 0% 0% / 0.1;
-    --glass-shadow: 0 8px 32px hsl(0 0% 0% / 0.1);
+    /* Glass morphism effects */
+    --glass-bg: 255 255 255 / 0.2;
+    --glass-border: 0 84% 60% / 0.1;
+    --glass-shadow: 0 8px 32px hsl(0 84% 60% / 0.1);
     
     /* Animation variables */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     
-    /* Gradients - Light */
-    --gradient-primary: linear-gradient(135deg, hsl(0 100% 60%), hsl(0 85% 45%));
-    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.3), hsl(0 0% 100% / 0.1));
-    --gradient-hero: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
-  }
-
-  .dark {
-    /* Dark futuristic theme with red accents */
-    --background: 220 25% 8%;
-    --foreground: 0 0% 95%;
-
-    --card: 220 25% 10%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 220 25% 10%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 0 100% 60%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 20% 15%;
-    --secondary-foreground: 0 0% 90%;
-
-    --muted: 220 15% 20%;
-    --muted-foreground: 0 0% 70%;
-
-    --accent: 0 85% 55%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 15% 25%;
-    --input: 220 15% 20%;
-    --ring: 0 100% 60%;
-
-    /* Glass morphism effects - Dark */
-    --glass-bg: 220 25% 10% / 0.1;
-    --glass-border: 0 0% 100% / 0.1;
-    --glass-shadow: 0 8px 32px hsl(220 25% 5% / 0.3);
-    
-    /* Gradients - Dark */
-    --gradient-primary: linear-gradient(135deg, hsl(0 100% 60%), hsl(0 85% 45%));
-    --gradient-glass: linear-gradient(135deg, hsl(220 25% 15% / 0.2), hsl(220 25% 10% / 0.4));
-    --gradient-hero: linear-gradient(180deg, hsl(220 25% 8%), hsl(220 25% 5%));
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 84% 60%), hsl(0 72% 51%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.4), hsl(0 0% 100% / 0.1));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-section: linear-gradient(135deg, hsl(0 84% 60% / 0.05), hsl(0 0% 100%), hsl(0 72% 51% / 0.05));
   }
 }
 
@@ -108,20 +68,22 @@ All colors MUST be HSL.
     min-height: 100vh;
     direction: rtl;
     background-attachment: fixed;
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(0 84% 60% / 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(0 72% 51% / 0.08) 0%, transparent 50%);
   }
 
-  /* Light theme background pattern */
-  body:not(.dark) {
-    background-image: 
-      radial-gradient(circle at 25% 25%, hsl(0 100% 60% / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(0 85% 55% / 0.05) 0%, transparent 50%);
+  /* Animated gradient background for sections */
+  .section-background {
+    background: var(--gradient-section);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
   }
 
-  /* Dark theme background pattern */
-  body.dark {
-    background-image: 
-      radial-gradient(circle at 25% 25%, hsl(0 100% 60% / 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(0 85% 55% / 0.1) 0%, transparent 50%);
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -147,18 +109,9 @@ All colors MUST be HSL.
   .glass-strong {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid hsl(var(--glass-border));
-  }
-
-  /* Glass strong variations for themes */
-  .dark .glass-strong {
-    background: hsl(220 25% 15% / 0.3);
-    border: 1px solid hsl(0 0% 100% / 0.2);
-  }
-
-  body:not(.dark) .glass-strong {
-    background: hsl(0 0% 100% / 0.3);
-    border: 1px solid hsl(0 0% 0% / 0.2);
+    background: hsl(0 0% 100% / 0.4);
+    border: 1px solid hsl(0 84% 60% / 0.2);
+    box-shadow: 0 8px 32px hsl(0 84% 60% / 0.1);
   }
 
   /* Animation utilities */

@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { useState } from 'react';
 import { GlassCard } from './GlassCard';
-import { ThemeToggle } from './ThemeToggle';
-import logoImage from '@/assets/logo.png';
+import { Button } from './ui/button';
+import teamLogo from '@/assets/team-logo.png';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,14 +33,14 @@ export const Header = () => {
           >
             <div className="relative">
               <img 
-                src={logoImage} 
+                src={teamLogo} 
                 alt="لوگو" 
-                className="w-10 h-10 rounded-xl animate-glow"
+                className="w-12 h-8 object-contain animate-glow"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-xl opacity-20 animate-pulse"></div>
             </div>
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              آینده‌نگر
+              قهرمانان زندگی
             </h1>
           </motion.div>
 
@@ -64,7 +64,18 @@ export const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            <ThemeToggle />
+            <Button 
+              variant="outline"
+              size="sm"
+              className="hidden md:flex glass-strong border-primary/30 hover:border-primary text-primary"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                contactSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <Phone className="w-4 h-4 ml-2" />
+              تماس با ما
+            </Button>
             
             {/* Mobile Menu Button */}
             <button

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
@@ -7,13 +6,6 @@ import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { Footer } from '@/components/Footer';
 
 const Index = () => {
-  useEffect(() => {
-    // Set dark theme by default on initial load
-    if (!localStorage.getItem('theme')) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    }
-  }, []);
   return (
     <div className="min-h-screen bg-background overflow-x-hidden scroll-smooth">
       {/* Header with Navigation */}

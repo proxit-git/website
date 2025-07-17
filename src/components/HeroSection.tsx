@@ -1,38 +1,54 @@
 import { motion } from 'framer-motion';
-import { Rocket, Sparkles, ArrowLeft } from 'lucide-react';
+import { Rocket, ArrowLeft } from 'lucide-react';
 import { GlassCard } from './GlassCard';
 import { AnimatedText } from './AnimatedText';
 import { Button } from './ui/button';
+import { useRef, useEffect, useState } from 'react';
+import teamLogo from '@/assets/team-logo.png';
 
 export const HeroSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoOpacity, setVideoOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(0, 1 - scrollY / 400);
+      setVideoOpacity(newOpacity);
+      
+      if (videoRef.current) {
+        videoRef.current.volume = newOpacity * 0.3; // Fade audio with scroll
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden pt-24">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360]
+      {/* Video Background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{ opacity: videoOpacity }}
+      >
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted={false}
+          playsInline
+          className="w-full h-full object-cover"
+          onLoadedData={() => {
+            if (videoRef.current) {
+              videoRef.current.volume = 0.3;
+            }
           }}
-          transition={{ 
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-accent/10 rounded-full blur-3xl"
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0]
-          }}
-          transition={{ 
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
+        >
+          <source src="https://raw.githubusercontent.com/proxit-git/website/main/ORG.mp4" type="video/mp4" />
+          متصفح شما از پخش ویدیو پشتیبانی نمی‌کند.
+        </video>
+        <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
       <div className="relative z-10 text-center max-w-4xl mx-auto">
@@ -42,26 +58,35 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, type: "spring" }}
           className="mb-8"
         >
-          <Sparkles className="w-16 h-16 mx-auto mb-6 text-primary animate-float" />
+          <img 
+            src={teamLogo} 
+            alt="لوگو قهرمانان زندگی" 
+            className="w-24 h-16 mx-auto mb-6 object-contain animate-float filter drop-shadow-lg"
+          />
         </motion.div>
 
-        <div className="relative">
-          <AnimatedText
-            as="h1"
-            text="آینده‌ای روشن، امروز آغاز می‌شود"
-            className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
-            variant="glow"
-            delay={0.3}
-          />
-          <div className="absolute inset-0 text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent leading-tight pointer-events-none">
-            آینده‌ای روشن، امروز آغاز می‌شود
-          </div>
+        <div className="relative mb-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-5xl md:text-7xl font-bold leading-tight text-center relative z-10"
+          >
+            <span className="inline-block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent bg-300% animate-pulse">
+              آینده‌ای روشن،
+            </span>
+            <br />
+            <span className="inline-block bg-gradient-to-r from-accent via-primary to-accent bg-clip-text text-transparent bg-300% animate-pulse">
+              امروز آغاز می‌شود
+            </span>
+          </motion.h1>
+          <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-transparent to-accent/20 blur-xl opacity-50 pointer-events-none"></div>
         </div>
 
         <AnimatedText
           as="p"
           text="ما تکنولوژی‌های پیشرفته را برای ساختن دنیایی بهتر و هوشمندتر توسعه می‌دهیم"
-          className="text-xl md:text-2xl text-foreground/80 mb-12 leading-relaxed max-w-3xl mx-auto"
+          className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-3xl mx-auto drop-shadow-lg"
           variant="slide"
           delay={0.6}
         />
@@ -86,7 +111,11 @@ export const HeroSection = () => {
           <Button 
             variant="outline" 
             size="lg"
-            className="glass-strong text-foreground border-primary/30 hover:border-primary px-8 py-4 rounded-2xl text-lg font-semibold group"
+            className="glass-strong text-white border-white/30 hover:border-white px-8 py-4 rounded-2xl text-lg font-semibold group"
+            onClick={() => {
+              const aboutSection = document.getElementById('about');
+              aboutSection?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
             <span className="flex items-center gap-2">
               بیشتر بدانید

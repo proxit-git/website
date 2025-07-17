@@ -8,41 +8,44 @@ export const EventsSection = () => {
   const events = [
     {
       id: 1,
-      title: 'کنفرانس هوش مصنوعی آینده',
-      date: '۱۵ فروردین ۱۴۰۴',
-      time: '۹:۰۰ - ۱۷:۰۰',
-      location: 'تهران، مرکز همایش‌های بین‌المللی',
-      attendees: 500,
-      description: 'کنفرانسی جامع درباره آخرین دستاوردها و کاربردهای هوش مصنوعی در صنایع مختلف',
-      status: 'upcoming',
-      image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+      title: 'معرفی پلتفرم قهرمانان زندگی',
+      date: '۲۵ دی ۱۴۰۳',
+      time: '۱۰:۰۰ - ۱۲:۰۰',
+      location: 'آنلاین - لایو استریم',
+      attendees: 1000,
+      description: 'رویداد رسمی معرفی پلتفرم قهرمانان زندگی و ماموریت تیم ما در تحول دیجیتال',
+      status: 'featured',
+      image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=400&fit=crop&crop=faces',
+      imageAlt: 'رویداد معرفی پلتفرم'
     },
     {
       id: 2,
-      title: 'ورکشاپ طراحی UX/UI آینده‌نگر',
-      date: '۲۸ فروردین ۱۴۰۴',
-      time: '۱۰:۰۰ - ۱۶:۰۰',
-      location: 'تهران، پارک علم و فناوری',
-      attendees: 150,
-      description: 'کارگاه عملی طراحی رابط کاربری با تمرکز بر تجربه کاربری مدرن و فناوری‌های نوین',
+      title: 'کارگاه آموزشی برنامه‌نویسی',
+      date: '۵ بهمن ۱۴۰۳',
+      time: '۹:۰۰ - ۱۷:۰۰',
+      location: 'تهران، مرکز نوآوری',
+      attendees: 50,
+      description: 'کارگاه عملی آموزش برنامه‌نویسی مدرن و فناوری‌های روز دنیا',
       status: 'upcoming',
-      image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+      image: 'https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&h=400&fit=crop&crop=faces',
+      imageAlt: 'کارگاه برنامه‌نویسی'
     },
     {
       id: 3,
-      title: 'نمایشگاه فناوری‌های نوظهور',
-      date: '۱۰ اردیبهشت ۱۴۰۴',
+      title: 'همایش فناوری و نوآوری',
+      date: '۱۵ بهمن ۱۴۰۳',
       time: '۸:۰۰ - ۲۰:۰۰',
-      location: 'تهران، نمایشگاه بین‌المللی',
-      attendees: 1000,
-      description: 'نمایشگاه بزرگ فناوری‌های پیشرفته شامل روباتیک، IoT، بلاک‌چین و واقعیت مجازی',
-      status: 'featured',
-      image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+      location: 'تهران، پالاس بین‌المللی',
+      attendees: 500,
+      description: 'همایش بزرگ نوآوری و فناوری با حضور متخصصان برتر کشور',
+      status: 'upcoming',
+      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=400&fit=crop&crop=faces',
+      imageAlt: 'همایش فناوری'
     }
   ];
 
   return (
-    <section id="events" className="py-20 px-4 relative">
+    <section id="events" className="py-20 px-4 relative section-background">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none opacity-50">
         <motion.div
@@ -100,11 +103,20 @@ export const EventsSection = () => {
                   </div>
                 )}
 
-                {/* Event image/gradient */}
-                <div 
-                  className="h-32 rounded-xl mb-6 relative overflow-hidden"
-                  style={{ background: event.image }}
-                >
+                {/* Event image */}
+                <div className="h-32 rounded-xl mb-6 relative overflow-hidden">
+                  {event.image.startsWith('http') ? (
+                    <img 
+                      src={event.image} 
+                      alt={event.imageAlt || event.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div 
+                      className="w-full h-full"
+                      style={{ background: event.image }}
+                    />
+                  )}
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Calendar className="w-12 h-12 text-white/80" />

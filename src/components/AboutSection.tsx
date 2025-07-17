@@ -38,18 +38,18 @@ export const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 px-4 mt-16">
+    <section id="about" className="py-20 px-4 mt-16 section-background">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <AnimatedText
             as="h2"
-            text="درباره تیم آینده‌نگر"
+            text="درباره قهرمانان زندگی"
             className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
             variant="slide"
           />
           <AnimatedText
             as="p"
-            text="ما گروهی از متخصصان پرشور هستیم که با استفاده از جدیدترین تکنولوژی‌ها، راه‌حل‌هایی نوآورانه برای چالش‌های آینده ارائه می‌دهیم"
+            text="ما تیمی از قهرمانان واقعی هستیم که با هدف تحول در زندگی مردم، راه‌حل‌های نوآورانه و کارآمد ارائه می‌دهیم. ماموریت ما کمک به افراد و سازمان‌ها برای دستیابی به یک زندگی بهتر از طریق فناوری‌های پیشرفته و خدمات متمایز است."
             className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed"
             variant="fade"
             delay={0.3}
