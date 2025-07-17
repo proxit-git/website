@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 0 100% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 0 85% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 0 100% 60%;
+
+    --radius: 1rem;
+
+    /* Glass morphism effects - Light */
+    --glass-bg: 255 255 255 / 0.1;
+    --glass-border: 0 0% 0% / 0.1;
+    --glass-shadow: 0 8px 32px hsl(0 0% 0% / 0.1);
+    
+    /* Animation variables */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Gradients - Light */
+    --gradient-primary: linear-gradient(135deg, hsl(0 100% 60%), hsl(0 85% 45%));
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.3), hsl(0 0% 100% / 0.1));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
+  }
+
+  .dark {
+    /* Dark futuristic theme with red accents */
+    --background: 220 25% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 0 100% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 85% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 20%;
+    --ring: 0 100% 60%;
+
+    /* Glass morphism effects - Dark */
+    --glass-bg: 220 25% 10% / 0.1;
+    --glass-border: 0 0% 100% / 0.1;
+    --glass-shadow: 0 8px 32px hsl(220 25% 5% / 0.3);
+    
+    /* Gradients - Dark */
+    --gradient-primary: linear-gradient(135deg, hsl(0 100% 60%), hsl(0 85% 45%));
+    --gradient-glass: linear-gradient(135deg, hsl(220 25% 15% / 0.2), hsl(220 25% 10% / 0.4));
+    --gradient-hero: linear-gradient(180deg, hsl(220 25% 8%), hsl(220 25% 5%));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+    direction: rtl;
+    background-attachment: fixed;
+  }
+
+  /* Light theme background pattern */
+  body:not(.dark) {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(0 100% 60% / 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(0 85% 55% / 0.05) 0%, transparent 50%);
+  }
+
+  /* Dark theme background pattern */
+  body.dark {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(0 100% 60% / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(0 85% 55% / 0.1) 0%, transparent 50%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lalezar', 'Vazirmatn', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism utilities */
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-card {
+    @apply glass rounded-3xl;
+    background: var(--gradient-glass);
+  }
+
+  .glass-strong {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  /* Glass strong variations for themes */
+  .dark .glass-strong {
+    background: hsl(220 25% 15% / 0.3);
+    border: 1px solid hsl(0 0% 100% / 0.2);
+  }
+
+  body:not(.dark) .glass-strong {
+    background: hsl(0 0% 100% / 0.3);
+    border: 1px solid hsl(0 0% 0% / 0.2);
+  }
+
+  /* Animation utilities */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: var(--transition-spring);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px hsl(220 25% 5% / 0.4);
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.5), var(--glass-shadow);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px hsl(var(--primary) / 0.5); }
+  to { box-shadow: 0 0 40px hsl(var(--primary) / 0.8); }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
